@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ledger-web
+spec:
+  selector:
+    matchLabels:
+      app: ledger
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ledger
+        tier: frontend
+    spec:
+      containers:
+      - name: ledger-web
+        image: yunling2003/ledger-web:v1
+        env:
+        - name: REACT_APP_API_URL
+          value: "http://app.ledger.com/api"
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8001

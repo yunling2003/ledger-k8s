@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ledger-db
+spec:
+  selector:
+    matchLabels:
+      app: ledger
+      tier: db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ledger
+        tier: db
+    spec:
+      containers:
+      - name: ledger-db
+        image: mongo:3.6
+        command:
+          - mongod
+          - "--bind_ip_all"
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 27017

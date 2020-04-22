@@ -1,0 +1,18 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ledger-ingress
+spec: 
+  rules:
+  - host: app.ledger.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ledger-web-service
+          servicePort: 8001
+      - path: /api
+        backend:
+          serviceName: ledger-api-service
+          servicePort: 8080
