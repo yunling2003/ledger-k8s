@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: ledger
       tier: frontend
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -16,10 +16,8 @@ spec:
     spec:
       containers:
       - name: ledger-web
-        image: yunling2003/ledger-web:v1
-        env:
-        - name: REACT_APP_API_URL
-          value: "http://app.ledger.com/api"
+        image: yunling2003/ledger-web:v2  
+        imagePullPolicy: Always      
         resources:
           limits:
             memory: "100Mi"
